@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JangHyeok Lee | Personal Website</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                background-color: #f4f4f4;
+                color: #333;
+                padding-top: 60px;
+            }
+
+            .container {
+                width: 90%;
+                max-width: 1200px;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+
+            .main-header {
+                background: #333;
+                color: #fff;
+                padding: 1rem 0;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            }
+
+            .logo {
+                font-size: 1.8rem;
+                float: left;
+                line-height: 1;
+                padding: 0.5rem 0;
+            }
+
+            .logo a {
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .main-nav {
+                float: right;
+                line-height: 1;
+                padding: 0.5rem 0;
+            }
+            
+            .main-nav ul li {
+                display: inline-block;
+            }
+
+            .main-nav ul {
+                display: flex;
+            }
+
+            .main-nav ul li a {
+                color: #fff;
+                text-decoration: none;
+                padding: 0.5rem 1rem;
+            }
+
+            .main-nav ul li a:hover {
+                background-color: #555;
+                border-radius: 5px;
+            }
+
+            .nav-toggle {
+                display: none;
+                background: none;
+                border: none;
+                padding: 10px;
+                position: relative;
+                z-index: 1001;
+                float: right;
+                margin-top: 10px;
+            }
+
+            .nav-toggle span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background: #fff;
+                margin: 5px 0;
+            }
+
+            .page-section {
+                padding: 60px 0;
+                display: none;
+                font-size: 14px;
+            }
+
+            .page-section.active {
+                display: block;
+            }
+
+            .page-section h2 {
+                font-size: 2.5rem;
+                text-align: center;
+                margin-bottom: 40px;
+                color: #333;
+            }
+
+            .page-section p {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .home-content {
+                text-align: left;
+                padding-top: 0;
+                overflow: hidden;
+            }
+            
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+                margin: 100 auto 20px auto;
+                float: left;
+                margin-right: 100px;
+            }
+
+            .profile-photo img {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                border: 5px solid #fff;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            }
+
+            .home-text {
+                max-width: 600px;
+                text-align: left;
+                overflow: hidden;
+            }
+
+            .course-list {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .course-list h6 { 
+                font-size: 1.8rem;
+                color: #555;
+                margin-top: 30px;
+                margin-bottom: 15px;
+                text-align: left;
+            }
+
+            .course-list h4:first-of-type {
+                margin-top: 0;
+            }
+
+            .course-list ul {
+                margin-left: 40px;
+                margin-bottom: 20px;
+                text-align: left;
+            }
+
+            .course-list ul li {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+
+            .hobby-item {
+                max-width: 900px;
+                width: 100%;
+                margin: 0 auto 35px auto;
+                overflow: hidden;
+            }
+
+            .hobby-item img {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .hobby-item.normal img {
+                float: left;
+                margin-right: 30px;
+            }
+
+            .hobby-item.reverse img {
+                float: right;
+                margin-left: 30px;
+            }
+
+            .hobby-text-group {
+                text-align: left;
+                overflow: hidden;
+            }
+            .hobby-text-group p {
+                text-align: left;
+                margin-bottom: 10px;
+            }
+            .hobby-text-group p:last-of-type {
+                margin-bottom: 0;
+            }
+
+            .main-footer {
+                background: #333;
+                color: #fff;
+                text-align: center;
+                padding: 1rem 0;
+                margin-top: 20px;
+            }
+
+            @media screen and (max-width: 768px) {
+                .main-nav ul {
+                    background: #333;
+                    position: absolute;
+                    top: 60px;
+                    right: 0;
+                    width: 100%;
+                    display: none;
+                    padding: 1rem 0;
+                    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+                    float: none;
+                }
+
+                .main-nav ul.active {
+                    display: block;
+                }
+
+                .main-nav ul li {
+                    display: block;
+                    text-align: center;
+                    margin: 0.5rem 0;
+                }
+
+                .main-nav ul li a {
+                    display: block;
+                    padding: 1rem;
+                }
+
+                .nav-toggle {
+                    display: block;
+                    float: right;
+                }
+
+                .main-header .container {
+                    overflow: hidden;
+                }
+
+                .main-header .logo {
+                    float: left;
+                }
+
+                .main-header .nav-toggle {
+                    float: right;
+                }
+
+                .home-content {
+                    text-align: center;
+                    padding-top: 60px;
+                    overflow: hidden;
+                }
+                .profile-photo {
+                    float: none;
+                    margin: 0 auto 20px auto;
+                }
+
+                .home-text {
+                    text-align: center;
+                    margin: 0 auto;
+                }
+
+                .course-list {
+                    padding: 15px;
+                }
+
+                .course-list h4 {
+                    font-size: 1.5rem;
+                }
+
+                .course-list ul {
+                    margin-left: 20px;
+                }
+
+                .hobby-item,
+                .hobby-item.normal,
+                .hobby-item.reverse {
+                    float: none;
+                    display: block;
+                    width: 100%;
+                    margin: 0 auto 30px auto;
+                    text-align: center;
+                }
+
+                .hobby-item img {
+                    float: none;
+                    display: block;
+                    margin: 0 auto 15px auto;
+                    max-width: 90%;
+                    width: auto;
+                    height: auto;
+                }
+
+                .hobby-text-group {
+                    float: none;
+                    display: block;
+                    width: 100%;
+                    margin: 0 auto;
+                    text-align: center;
+                }
+                .hobby-text-group p {
+                    text-align: center;
+                }
+
+                .main-footer {
+                    margin-top: 50px;
+                }
+            }
+
+            @media screen and (max-width: 480px) {
+                .page-section h2 {
+                    font-size: 2rem;
+                }
+            }
+        </style>
+
+        <script>
+            $(document).ready(function() {
+                $('#home').addClass('active');
+
+                $('.main-nav ul li a').on('click', function(e) {
+                    e.preventDefault();
+
+                    $('.page-section').removeClass('active');
+
+                    const targetSectionId = $(this).attr('href');
+
+                    $(targetSectionId).addClass('active');
+
+                    if ($('.main-nav ul').hasClass('active')) {
+                        $('.main-nav ul').removeClass('active');
+                        $('.nav-toggle').removeClass('active');
+                    }
+                });
+
+                $('.logo a').on('click', function(e) {
+                    e.preventDefault();
+
+                    $('.page-section').removeClass('active');
+
+                    $('#home').addClass('active');
+
+                    if ($('.main-nav ul').hasClass('active')) {
+                        $('.main-nav ul').removeClass('active');
+                        $('.nav-toggle').removeClass('active');
+                    }
+                    window.location.hash = '#home';
+                });
+
+                $('.nav-toggle').on('click', function() {
+                    $('.main-nav ul').toggleClass('active');
+                    $(this).toggleClass('active');
+                });
+
+                $(window).on('hashchange', function() {
+                    const hash = window.location.hash;
+                    if (hash) {
+                        $('.page-section').removeClass('active');
+                        $(hash).addClass('active');
+                    } else {
+                        $('.page-section').removeClass('active');
+                        $('#home').addClass('active');
+                    }
+                });
+
+                if (window.location.hash) {
+                    $(window.location.hash).addClass('active');
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="container">
+                <h1 class="logo"><a href="#home">JangHyeok Lee</a></h1>
+                <nav class="main-nav">
+                    <button class="nav-toggle" aria-label="메뉴 토글">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#major">Major</a></li>
+                        <li><a href="#hobby">Hobby</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section id="home" class="page-section active">
+                <div class="container home-content">
+                    <div class="profile-photo">
+                        <img src="./image.png" alt="내 프로필 사진">
+                    </div>
+                    <div class="home-text">
+                        <p>안녕하세요. 저는 이장혁입니다.</p>
+                        <p>저는 2003년생이고 서울에서 태어났습니다. 춘천에 거주중이고  MBTI는 ISFJ입니다.</p>
+                        <p>2022년에 <a href="https://wwwk.kangwon.ac.kr">강원대학교</a> 컴퓨터공학과에 입학하였고 1학년 마치고 군 입대 후</p>
+                        <p>2025년에 복학해서 2학년으로 재학중입니다.</p>
+                        <p>늘 성실함과 책임감을 바탕으로 맡은 일을 끝까지 해내는 걸 중요하게 생각합니다.</p>
+                        <p>사람들과 깊이 있는 관계를 맺는 것을 좋아하고, 필요한 일이 있으면 조용히 도와주는 편입니다.</p>    
+                    </div>
+                </div>
+            </section>
+
+            <section id="major" class="page-section">
+                <div class="container">
+                    <h2>Major</h2>
+                    <div class="course-list">
+                        <h3>2022년 (1학년 1학기)</h3>
+                        <ul>
+                            <li>자바 프로그래밍 1</li>
+                            <li>컴퓨터 개론</li>
+                            <li>파이썬 이해와 활용</li>
+                        </ul>
+
+                        <h3>2022년 (1학년 2학기)</h3>
+                        <ul>
+                            <li>C 프로그래밍</li>
+                            <li>자바 프로그래밍 2</li>
+                            <li>컴퓨팅 사고력</li>
+                        </ul>
+
+                        <h3>2023-24년</h3>
+                        <ul>
+                            <li>군 복무</li>
+                        </ul>
+
+                        <h3>2025년 (2학년 1학기)</h3>
+                        <ul>
+                            <li>웹프로그래밍</li>
+                            <li>논리회로</li>
+                            <li>자료구조</li>
+                            <li>고급파이썬프로그래밍</li>
+                            <li>C++프로그래밍</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="hobby" class="page-section">
+                <div class="container">
+                    <h2>Hobby</h2>
+                    <div class="hobby-content-wrapper">
+                        <div class="hobby-item normal">
+                            <img src="./러닝.jpg" alt="러닝 사진">
+                            <div class="hobby-text-group">
+                                <p>취미는 운동이며 주로 헬스와 러닝을 좋아합니다. 주 3회이상 꾸준히 하려고 노력하고 있습니다.</p>
+                                <p>러닝은 주로 퇴계천부터 공지천까지의 코스를 뜁니다.</p>
+                                <p>뛰다보면 정말 힘들지만 목표했던 거리를 완주했을 때</p>
+                                <p>해냈다는 그 성취감,뿌듯함이 좋아서 러닝을 하는 것 같습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="hobby-item reverse">
+                            <img src="./카더가든 앨범.jpg" alt="카더가든 앨범 사진">
+                            <div class="hobby-text-group">
+                                <p>노래 듣는 것을 좋아하고 밴드, 인디음악을 좋아합니다. 좋아하는 가수는 <a href="https://namu.wiki/w/%EC%B9%B4%EB%8D%94%EA%B0%80%EB%93%A0" target="_blank">카더가든</a>입니다.</p>
+                                <p>카더가든의 Home Sweet Home이라는 노래를 좋아합니다.</p>
+                                <p>좋아하는 가수의 노래를 들으며 생각없이 집 앞 하천을 따라 산책하는 것을 좋아합니다.</p>
+                                <p>노래뿐만 아니라 OTT 플랫폼이나 Youtube로 영상 보는 것도 좋아합니다.</p>
+                                <p>좋아하는 영화로는 어바웃타임이 있습니다.</p>
+                                <p>최근에는 요리에 흥미를 느껴 다양한 요리를 시도해 보고 있습니다.</p>
+                                <p>아직은 부족하지만 제가 만든 요리를 먹는 사람이 맛있게 먹어줄 때 뿌듯했던 것 같습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="container">
+                <p>&copy; 2025 JangHyeok Lee. All rights reserved.</p>
+            </div>
+        </footer>
+    </body>
+</html>
